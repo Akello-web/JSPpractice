@@ -1,5 +1,5 @@
 <%
-    String nameStore = "Book Hub";
+    String nameStore = "Book Store";
 %>
 
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
