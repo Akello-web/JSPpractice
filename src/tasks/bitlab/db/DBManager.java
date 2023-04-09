@@ -68,7 +68,7 @@ public class DBManager {
     public static void deleteBook(int id){
         for (int i = 0; i < books.size(); i++) {
             if(books.get(i).getId()== id){
-                books.remove(id);
+                books.remove(books.get(i));
                 break;
             }
         }
