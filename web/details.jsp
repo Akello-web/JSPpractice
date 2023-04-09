@@ -174,8 +174,7 @@
                             </div>
                             <div class="row mt-1" >
                                 <div class="col-12">
-                                    <textarea class="form-control" name="book_description" rows="5">
-                                        <%=book.getDescription()%></textarea>
+                                    <textarea class="form-control" name="book_description" rows="5"><%=book.getDescription()%></textarea>
                                 </div>
                             </div>
                             <div class="row mt-3">

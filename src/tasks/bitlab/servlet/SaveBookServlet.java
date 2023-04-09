@@ -34,8 +34,5 @@ public class SaveBookServlet extends HttpServlet {
         }else {
             response.sendRedirect("/");
         }
-
-
-
     }
 }
