@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import tasks.bitlab.db.Book;
+import tasks.bitlab.db.DBConnection;
 import tasks.bitlab.db.DBManager;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class SaveBookServlet extends HttpServlet {
         double price = Double.parseDouble(request.getParameter("book_price"));
         String description = request.getParameter("book_description");
 
-        Book book = DBManager.getBook(id);
+        Book book = DBConnection.getBook(id);
         if(book!=null){
             book.setName(name);
             book.setAuthor(author);
@@ -29,7 +30,7 @@ public class SaveBookServlet extends HttpServlet {
             book.setPrice(price);
             book.setDescription(description);
 
-            DBManager.updateBook(book);
+            DBConnection.updateBook(book);
             response.sendRedirect("/details?book_id="+id);
         }else {
             response.sendRedirect("/");

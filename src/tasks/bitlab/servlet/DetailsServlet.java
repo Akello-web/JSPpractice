@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import tasks.bitlab.db.Book;
+import tasks.bitlab.db.DBConnection;
 import tasks.bitlab.db.DBManager;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class DetailsServlet extends HttpServlet {
         }catch (Exception e){
         }
 
-        Book book = DBManager.getBook(id);//Нашел с базы подходящую книгу по айди
+        Book book = DBConnection.getBook(id);//Нашел с базы подходящую книгу по айди
         req.setAttribute("kniga", book);//записал под ключ
         req.getRequestDispatcher("/details.jsp").forward(req, resp);//перенаправил на сайт
     }

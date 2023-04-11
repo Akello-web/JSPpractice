@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import tasks.bitlab.db.Book;
+import tasks.bitlab.db.DBConnection;
 import tasks.bitlab.db.DBManager;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class AddBookServlet extends HttpServlet {
         book.setPrice(price);
         book.setDescription(description);
 
-        DBManager.addBooks(book);
+        DBConnection.addBook(book);
 
         response.sendRedirect("/");//делает так, что после успешного выполнения программа сразу провалевает подальше
     }
