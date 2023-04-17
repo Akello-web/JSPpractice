@@ -1,3 +1,4 @@
+<%@ page import="tasks.bitlab.db.Author" %>
 <form action="/add-book" method="POST">
   <div class="row mt-3">
     <div class="col-12">
@@ -16,7 +17,17 @@
   </div>
   <div class="row mt-1" >
     <div class="col-12">
-      <input type="text" class="form-control" name="book_author" required>
+      <select class="form-select" name="book_author" required>
+        <%
+          ArrayList<Author> author = (ArrayList<Author>) request.getAttribute("avtorlar");
+          if(author!=null){
+            for (Author auth : author){
+        %>
+        <option value="<%=auth.getId()%>"><%=auth.getFirstName() + " " + auth.getLastName()%></option>
+        <%
+          }}
+        %>
+      </select>
     </div>
   </div>
   <div class="row mt-3">
@@ -31,6 +42,9 @@
         <option>Politics</option>
         <option>Philosophy</option>
         <option>BestSeller</option>
+        <option>Science</option>
+        <option>Roman</option>
+        <option>History</option>
       </select>
     </div>
   </div>

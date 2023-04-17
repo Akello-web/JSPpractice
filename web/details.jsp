@@ -1,5 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tasks.bitlab.db.Book" %>
+<%@ page import="tasks.bitlab.db.Author" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -33,7 +35,7 @@
         </div>
         <div class="row mt-1" >
           <div class="col-12">
-            <input type="text" class="form-control" readonly value="<%=book.getAuthor()%>">
+            <input type="text" class="form-control" readonly value="<%=book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName()%>">
           </div>
         </div>
         <div class="row mt-3">
@@ -76,6 +78,7 @@
                 </button>
             </div>
         </div>
+
         <div class="modal fade" id="editBook" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -104,8 +107,19 @@
                             </div>
                             <div class="row mt-1" >
                                 <div class="col-12">
-                                    <input type="text" class="form-control" name="book_author"
-                                           value="<%=book.getAuthor()%>">
+                                    <select class="form-select" name="book_author" required>
+                                        <%
+                                            ArrayList<Author> authors = (ArrayList<Author>) request.getAttribute("avtorlar");
+                                            if(authors!=null){
+                                                for (Author auths : authors){
+                                        %>
+
+                                        <option <%=(auths.getId()==book.getAuthor().getId()?"selected":"")%> value="<%=auths.getId()%>" ><%=auths.getFirstName() + " " + auths.getLastName()%></option>
+
+                                        <%
+                                                }}
+                                        %>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -122,8 +136,12 @@
                                         >Politics</option>
                                         <option <%=(book.getGenre().equals("Philosophy")?"selected":"")%>
                                         >Philosophy</option>
-                                        <option <%=(book.getGenre().equals("BestSeller")?"selected":"")%>
-                                        >BestSeller</option>
+                                        <option <%=(book.getGenre().equals("Roman")?"selected":"")%>
+                                        >Roman</option>
+                                        <option <%=(book.getGenre().equals("History")?"selected":"")%>
+                                        >History</option>
+                                        <option <%=(book.getGenre().equals("Science")?"selected":"")%>
+                                        >Science</option>
                                     </select>
                                 </div>
                             </div>
@@ -138,7 +156,7 @@
                                         <%
                                             for (int i = 0; i <= 10000; i=i+500) {
                                         %>
-                                        <option <%=(i==book.getPrice())?"selected":""%> ><%=i%></option>
+                                        <option <%=(i==book.getPrice()?"selected":"")%>><%=i%></option>
                                         <%
                                             }
                                         %>

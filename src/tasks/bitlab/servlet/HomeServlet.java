@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import tasks.bitlab.db.Author;
 import tasks.bitlab.db.Book;
 import tasks.bitlab.db.DBConnection;
 
@@ -17,6 +18,9 @@ public class HomeServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArrayList<Book> books = DBConnection.getBooks();
         req.setAttribute("buks", books);
+
+        ArrayList<Author> authors = DBConnection.getAuthors();
+        req.setAttribute("avtorlar", authors);
         req.getRequestDispatcher("/books.jsp").forward(req, resp);
     };
 }

@@ -61,7 +61,7 @@
                                 <tr>
                                     <td><%=k.getId()%></td>
                                     <td><%=k.getName()%></td>
-                                    <td><%=k.getAuthor()%></td>
+                                    <td><%=k.getAuthor().getFirstName() + " " + k.getAuthor().getLastName()%></td>
                                     <td><%=k.getGenre()%></td>
                                     <td><%=k.getPrice()%> KZT</td>
                                     <td>
