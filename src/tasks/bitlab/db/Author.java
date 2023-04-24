@@ -4,6 +4,7 @@ public class Author {
     private int id;
     private String firstName;
     private String lastName;
+    private String description;
 
     public Author() {
     }
@@ -12,6 +13,13 @@ public class Author {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Author(int id, String firstName, String lastName, String description) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
     }
 
     public int getId() {
@@ -36,5 +44,13 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

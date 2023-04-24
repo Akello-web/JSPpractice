@@ -199,4 +199,21 @@ public class DBConnection {
         }
         return author;
     }
+
+    public static void addAuthor(Author author){
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "INSERT INTO table_authors (first_name, last_name, author_description) " +
+                    "VALUES (?, ?, ?)");
+
+            statement.setString(1, author.getFirstName());
+            statement.setString(2, author.getLastName());
+            statement.setString(3, author.getDescription());
+
+            statement.executeUpdate();//отправляем данные
+            statement.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
