@@ -12,11 +12,14 @@
   <%@include file="navbar.jsp"%>
   <div class="row mt-3">
     <div class="col-12">
-      <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_book">
+      <%
+        if(currentUser!=null){
+      %>
+      <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_author">
         + Add Author
       </button>
 
-      <div class="modal fade" id="add_book" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal fade" id="add_author" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -71,6 +74,9 @@
       </div>
     </div>
   </div>
+  <%
+    }
+  %>
 
   <div class="row mt-3">
     <div class="col-12">
@@ -88,14 +94,14 @@
         <%
           ArrayList<Author> avtor = (ArrayList<Author>) request.getAttribute("avtorlar");
           if(avtor!=null){
-            for (Author k : avtor){
+            for (Author a : avtor){
         %>
         <tr>
-          <td><%=k.getId()%></td>
-          <td><%=k.getFirstName()%></td>
-          <td><%=k.getLastName()%></td>
+          <td><%=a.getId()%></td>
+          <td><%=a.getFirstName()%></td>
+          <td><%=a.getLastName()%></td>
           <td>
-            <a href="/details?author_id=<%=k.getId()%>" class="btn btn-success btn-small">Details</a>
+            <a href="/detailsAuthor?author_page_id=<%=a.getId()%>" class="btn btn-success btn-small">Details</a>
           </td>
         </tr>
         <%

@@ -12,24 +12,30 @@ import tasks.bitlab.db.User;
 
 import java.io.IOException;
 
-@WebServlet(value = "/add-author")
-public class AddAuthorServlet extends HttpServlet {
+@WebServlet(value = "/save-author")
+public class SaveAuthorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User currentUser = (User) request.getSession().getAttribute("currentUser");
-        if(currentUser!=null) {
+        User user = (User) request.getSession().getAttribute("currentUser");
+        if(user!=null) {
+
+            int id = Integer.parseInt(request.getParameter("author_page_id"));
             String firstName = request.getParameter("first_name");
             String lastName = request.getParameter("last_name");
             String description = request.getParameter("author_description");
 
-            Author author = new Author();
-            author.setFirstName(firstName);
-            author.setLastName(lastName);
-            author.setDescription(description);
+            Author author = DBConnection.getAuthor(id);
+            if (author != null) {
+                author.setFirstName(firstName);
+                author.setLastName(lastName);
+                author.setDescription(description);
 
-            DBConnection.addAuthor(author);
+                DBConnection.updateAuthor(author);
+                response.sendRedirect("/detailsAuthor?author_page_id=" + id);
+            } else {
+                response.sendRedirect("/");
+            }
 
-            response.sendRedirect("/add-page_author");
         }else {
             response.sendRedirect("/login");
         }

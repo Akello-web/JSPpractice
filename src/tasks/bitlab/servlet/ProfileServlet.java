@@ -5,22 +5,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import tasks.bitlab.db.Author;
-import tasks.bitlab.db.DBConnection;
+import jakarta.servlet.http.HttpSession;
 import tasks.bitlab.db.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-@WebServlet(value = "/add-page_book")
-public class AddBookPageServlet extends HttpServlet {
+@WebServlet (value = "/profile")
+public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("currentUser");
-        if(user!=null){
-            ArrayList<Author> authors = DBConnection.getAuthors();
-            request.setAttribute("avtorlar", authors);
-            request.getRequestDispatcher("/addBook.jsp").forward(request, response);
+        User currentUser = (User) request.getSession().getAttribute("currentUser");
+        if(currentUser!=null){
+            request.getRequestDispatcher("/profile.jsp").forward(request, response);
         }else {
             response.sendRedirect("/login");
         }

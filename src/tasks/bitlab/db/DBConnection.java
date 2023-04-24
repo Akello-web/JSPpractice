@@ -192,6 +192,7 @@ public class DBConnection {
                 author.setId(resultSet.getInt("id"));
                 author.setFirstName(resultSet.getString("first_name"));
                 author.setLastName(resultSet.getString("last_name"));
+                author.setDescription(resultSet.getString("author_description"));
             }
             statement.close();
         }catch (Exception e){
@@ -210,10 +211,72 @@ public class DBConnection {
             statement.setString(2, author.getLastName());
             statement.setString(3, author.getDescription());
 
-            statement.executeUpdate();//отправляем данные
+            statement.executeUpdate();
             statement.close();
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static void updateAuthor(Author author){
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "UPDATE table_authors " +
+                    "SET " +
+                    "first_name = ?, " +
+                    "last_name = ?, " +
+                    "author_description = ? " +
+                    "WHERE id = ?");
+
+            statement.setString(1, author.getFirstName());
+            statement.setString(2, author.getLastName());
+            statement.setString(3, author.getDescription());
+            statement.setInt(4, author.getId());
+
+            statement.executeUpdate();
+            statement.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteAuthor(int id){
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "DELETE FROM table_authors WHERE id = ?");
+            statement.setInt(1, id) ;
+
+
+            statement.executeUpdate();
+            statement.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static User getUser(String email) {
+
+        User user = null;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "SELECT * FROM table_users WHERE email = ?");
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setFullName(resultSet.getString("full_name"));
+            }
+            statement.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return user;
     }
 }

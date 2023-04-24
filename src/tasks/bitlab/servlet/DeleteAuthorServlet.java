@@ -5,25 +5,23 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import tasks.bitlab.db.Author;
 import tasks.bitlab.db.DBConnection;
 import tasks.bitlab.db.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-@WebServlet(value = "/add-page_book")
-public class AddBookPageServlet extends HttpServlet {
+@WebServlet(value = "/delete-author")
+public class DeleteAuthorServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("currentUser");
-        if(user!=null){
-            ArrayList<Author> authors = DBConnection.getAuthors();
-            request.setAttribute("avtorlar", authors);
-            request.getRequestDispatcher("/addBook.jsp").forward(request, response);
+        if(user!=null) {
+
+            int id = Integer.parseInt(request.getParameter("id"));
+            DBConnection.deleteAuthor(id);
+            response.sendRedirect("/add-page_author");
         }else {
             response.sendRedirect("/login");
         }
-
     }
 }

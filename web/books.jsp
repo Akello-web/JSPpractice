@@ -11,6 +11,13 @@
             <%@include file="navbar.jsp"%>
             <div class="row mt-3">
                 <div class="col-12">
+                    <div class="row">
+                        <h3 class="text-center">Welcome to <%=nameStore%>!</h3>
+                    </div>
+
+                    <%
+                        if(currentUser!=null){
+                    %>
                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_book">
                         + Add Book
                     </button>
@@ -33,10 +40,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <h3 class="text-center">Welcome to <%=nameStore%>!</h3>
-            </div>
+            <%
+                }
+            %>
 
             <div class="row mt-3">
                 <div class="col-12">

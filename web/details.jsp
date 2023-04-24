@@ -68,6 +68,9 @@
           <textarea class="form-control" readonly rows="5"><%=book.getDescription()%></textarea>
         </div>
       </div>
+        <%
+            if(currentUser!=null){
+        %>
         <div class="row mt-3">
             <div class="col-12">
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editBook">
@@ -78,6 +81,7 @@
                 </button>
             </div>
         </div>
+
 
         <div class="modal fade" id="editBook" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -204,6 +208,9 @@
                 </div>
             </div>
         </div>
+        <%
+            }
+        %>
 
     </div>
   </div>
