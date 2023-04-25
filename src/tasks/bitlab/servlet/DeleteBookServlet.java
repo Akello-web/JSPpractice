@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import tasks.bitlab.db.DBConnection;
-import tasks.bitlab.db.DBManager;
 import tasks.bitlab.db.User;
 
 import java.io.IOException;

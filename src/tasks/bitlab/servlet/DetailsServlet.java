@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import tasks.bitlab.db.Author;
 import tasks.bitlab.db.Book;
 import tasks.bitlab.db.DBConnection;
-import tasks.bitlab.db.DBManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
