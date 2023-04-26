@@ -9,11 +9,7 @@ import tasks.bitlab.db.DBConnection;
 import tasks.bitlab.db.User;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.Objects;
+import java.sql.*;
 
 @WebServlet(value = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -28,21 +24,21 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String full_name = request.getParameter("full_name");
         String re_password = request.getParameter("re-password");
-        String success = "";
 
-        if(!Objects.equals(password, re_password)){
-            success = "failed";
-            request.setAttribute("issuccess", success);
-            response.sendRedirect("/register");
-        }else {
-            User user = new User();
-            user.setFullName(full_name);
-            user.setEmail(email);
-            user.setPassword(password);
+        User user = DBConnection.getUser(email);
+        if(user == null){
+            if(password.equals(re_password)){
+            User createUser = new User();
+            createUser.setEmail(email);
+            createUser.setPassword(password);
+            createUser.setFullName(full_name);
 
-            DBConnection.addUser(user);
-
+            DBConnection.addUser(createUser);
             response.sendRedirect("/register?success");
+            }else {
+            response.sendRedirect("/register?passworderror");}
+        }else {
+            response.sendRedirect("/register?emailerror");
         }
     }
 }

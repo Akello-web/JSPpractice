@@ -13,16 +13,30 @@
   <div class="row mt-3">
     <div class="col-6 mx-auto">
       <%
-        String fail = (String) request.getAttribute("issuccess");
-        System.out.println(fail);
-        if(Objects.equals(fail, "failed")){
-      %>
+      String emailerror = request.getParameter("emailerror");
+      if(emailerror!=null){
+    %>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Incorrect login or password!
+        The email is busy!
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       <%
-        }else if(Objects.equals(fail, "success")){
+        }
+      %>
+      <%
+        String passworderror = request.getParameter("passworderror");
+        if(passworderror!=null){
+      %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Password are not same!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <%
+        }
+      %>
+      <%
+        String success = request.getParameter("success");
+        if(success!=null){
       %>
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         User created successfully!
