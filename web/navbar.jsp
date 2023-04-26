@@ -1,7 +1,7 @@
 <%@ page import="tasks.bitlab.db.User" %><%
   User currentUser = (User) session.getAttribute("currentUser");
 %>
-<div class="row">
+<div class="row mb-3">
   <div class="col-12">
     <nav class="navbar navbar-expand-lg bg-success navbar-dark">
       <div class="container-fluid">
@@ -17,11 +17,18 @@
             <li class="nav-item">
               <a class="nav-link" href="/add-page_author">All authors</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/news">All news</a>
+            </li>
+
             <%
               if(currentUser!=null){
             %>
             <li class="nav-item">
               <a class="nav-link" href="/add-page_book">Add book</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/add-page_news">Add news</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

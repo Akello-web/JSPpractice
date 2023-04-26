@@ -1,6 +1,6 @@
 <%@ page import="tasks.bitlab.db.Author" %>
 <form action="/add-book" method="POST">
-  <div class="row mt-3">
+  <div class="row mt">
     <div class="col-12">
       <label>NAME: </label>
     </div>
