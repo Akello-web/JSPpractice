@@ -6,6 +6,7 @@ public class User {
     private String password;
     private String fullName;
 
+    private int role;
     public User() {
     }
 
@@ -46,5 +47,13 @@ public class User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }

@@ -13,8 +13,8 @@ import java.io.IOException;
 public class AddBookServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("currentUser");
-        if(user!=null) {
+        User currentUser = (User) request.getSession().getAttribute("currentUser");
+        if(currentUser!=null && currentUser.getRole()==1) {
             String name = request.getParameter("book_name");
             int authorId = Integer.parseInt(request.getParameter("book_author"));
             String genre = request.getParameter("book_genre");

@@ -16,11 +16,15 @@ import java.util.ArrayList;
 public class AddBookPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("currentUser");
-        if(user!=null){
-            ArrayList<Author> authors = DBConnection.getAuthors();
-            request.setAttribute("avtorlar", authors);
-            request.getRequestDispatcher("/addBook.jsp").forward(request, response);
+        User currentUser = (User) request.getSession().getAttribute("currentUser");
+        if(currentUser!=null){
+            if(currentUser.getRole()==1) {
+                ArrayList<Author> authors = DBConnection.getAuthors();
+                request.setAttribute("avtorlar", authors);
+                request.getRequestDispatcher("/addBook.jsp").forward(request, response);
+            }else {
+                request.getRequestDispatcher("/403.jsp").forward(request, response);
+            }
         }else {
             response.sendRedirect("/login");
         }

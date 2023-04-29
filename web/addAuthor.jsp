@@ -13,7 +13,7 @@
   <div class="row mt-3">
     <div class="col-12">
       <%
-        if(currentUser!=null){
+        if(currentUser!=null && currentUser.getRole()==1){
       %>
       <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add_author">
         + Add Author

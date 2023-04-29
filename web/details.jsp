@@ -69,7 +69,7 @@
         </div>
       </div>
         <%
-            if(currentUser!=null){
+            if(currentUser!=null && currentUser.getRole()==1){
         %>
         <div class="row mt-3">
             <div class="col-12">

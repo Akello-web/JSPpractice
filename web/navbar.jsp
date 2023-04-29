@@ -24,9 +24,15 @@
             <%
               if(currentUser!=null){
             %>
+            <%
+              if(currentUser.getRole()==1){
+            %>
             <li class="nav-item">
               <a class="nav-link" href="/add-page_book">Add book</a>
             </li>
+            <%
+              }
+            %>
             <li class="nav-item">
               <a class="nav-link" href="/add-page_news">Add news</a>
             </li>

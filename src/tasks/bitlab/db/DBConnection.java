@@ -274,6 +274,7 @@ public class DBConnection {
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setFullName(resultSet.getString("full_name"));
+                user.setRole(resultSet.getInt("role_id"));
             }
             statement.close();
         }catch (Exception e){
@@ -285,12 +286,13 @@ public class DBConnection {
     public static void addUser(User user){
         try {
             PreparedStatement statement = connection.prepareStatement("" +
-                    "INSERT INTO table_users (email, password, full_name) " +
-                    "VALUES (?, ?, ?)");
+                    "INSERT INTO table_users (email, password, full_name, role_id) " +
+                    "VALUES (?, ?, ?, ?)");
 
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFullName());
+            statement.setInt(3, user.getRole());
 
             statement.executeUpdate();
             statement.close();
