@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import tasks.bitlab.db.Author;
 import tasks.bitlab.db.Book;
 import tasks.bitlab.db.DBConnection;
@@ -15,12 +16,21 @@ import java.util.ArrayList;
 
 @WebServlet(value = "/home.html")//если в браузере открыть "/home.html", заработает программа
 public class HomeServlet extends HttpServlet {
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ArrayList<Book> books = DBConnection.getBooks();
-        req.setAttribute("buks", books);
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String key = request.getParameter("key");
+        if(key!=null){
+            ArrayList<Book> books = DBConnection.searchBooks("%"+key+"%");
+            request.setAttribute("buks", books);
+        }else {
+            ArrayList<Book> books = DBConnection.getBooks();
+            request.setAttribute("buks", books);
+        }
+
+
 
         ArrayList<Author> authors = DBConnection.getAuthors();
-        req.setAttribute("avtorlar", authors);
-        req.getRequestDispatcher("/books.jsp").forward(req, resp);
+        request.setAttribute("avtorlar", authors);
+        request.getRequestDispatcher("/books.jsp").forward(request, response);
     };
 }

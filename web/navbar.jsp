@@ -10,7 +10,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
@@ -60,6 +60,14 @@
               }
             %>
           </ul>
+          <form action="/" method="get" class="form-control-sm ml-auto w-50 d-flex m-0 me-4">
+            <%
+              String key = request.getParameter("key");
+              if(key==null) key = "";
+            %>
+          <input class="form-control mr-sm-2" type="search" name="key" placeholder="search..." value="<%=key%>">
+          <button class="ms-1 btn btn-primary my-2 my-sm-0">Search</button>
+          </form>
         </div>
       </div>
     </nav>

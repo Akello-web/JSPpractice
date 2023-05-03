@@ -464,4 +464,44 @@ public class DBConnection {
         }
         return comments;
     }
+
+    public static ArrayList<Book> searchBooks(String key){
+
+        ArrayList<Book> books = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "SELECT tb.id, tb.name, tb.genre, tb.price,tb.description, tb.author_id, tau.first_name, tau.last_name " +
+                    "FROM table_books AS tb " +
+                    "INNER JOIN table_authors AS tau ON tb.author_id = tau.id " +
+                    "WHERE LOWER(tb.name) LIKE LOWER(?) " +
+                    "ORDER BY tb.price DESC");
+
+            statement.setString(1, key);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                Book book = new Book();
+                book.setId(resultSet.getInt("id"));
+                book.setName(resultSet.getString("name"));
+                book.setGenre(resultSet.getString("genre"));
+                book.setDescription(resultSet.getString("description"));
+                book.setPrice(resultSet.getDouble("price"));
+
+                Author author = new Author();
+                author.setId(resultSet.getInt("author_id"));
+                author.setFirstName(resultSet.getString("first_name"));
+                author.setLastName(resultSet.getString("last_name"));
+
+                book.setAuthor(author);
+
+                books.add(book);
+            }
+            statement.close();//закрываем запрос
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return books;
+    }
 }
